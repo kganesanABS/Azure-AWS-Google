@@ -64,62 +64,31 @@ jobs:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           publish-profile:  ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
-           
-name: CI CD AWS GitHub actions
-
-# Controls when the action will run. 
-on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ aws ]
-  pull_request:
-    branches: [ aws ]
-
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.8]    
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    #does this mean that the files in my github repo are accessible by this YAML file?
-    - uses: actions/checkout@v2
-    
-    #installs a version of python, but I need this if deploying to a severless Python Lambda?
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    
-    
+      
+ 
     #credentials to connect to AWS
-    - name: Configure AWS credentials from Admin account
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-central-1
-        profile_name: default
-        runtime: python3.8
+      - name: Configure AWS credentials from Admin account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+          profile_name: default
+          runtime: python3.8
     
     # Runs a set of commands using the runners shell; THIS DOESN'T WORK
-    - name: Run multiple commands for install environment
-      run: |
-         #install PIP
-         python -m pip install pip --upgrade pip
-         #install all dependencies as defined by requirements.txt in the current directory
-         pip3 install -r requirements.txt
-         npm install
-         #ensuring current working directory is accessible by the function--this might not be doing anything
-         export PATH=$PATH:$(pwd)
-    
-    #Deploy main.py to AWS
-    - name: Serverless
-      uses: serverless/github-action@master
-      with:
-        args: deploy --region eu-central-1
+      - name: Run multiple commands for install environment
+        run: |
+           #install PIP
+           python -m pip install pip --upgrade pip
+           #install all dependencies as defined by requirements.txt in the current directory
+           pip3 install -r requirements.txt
+           npm install
+           #ensuring current working directory is accessible by the function--this might not be doing anything
+           export PATH=$PATH:$(pwd)
+
+      #Deploy main.py to AWS
+      - name: Serverless
+        uses: serverless/github-action@master
+        with:
+          args: deploy --region eu-central-1
