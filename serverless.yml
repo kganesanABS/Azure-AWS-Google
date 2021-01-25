@@ -1,48 +1,40 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-Description: Create an API gateway with triggered Lambda function
+service: GitHubActions
+
+provider:
+  name: aws
+  runtime: python3.7
+  stage: dev
+  region: eu-central-1
       
-  Function:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./
-      FunctionName: HelloWorldFunction-GitHub
-      Handler: Lambda_function.lambda_handler
-      Runtime: python3.8
-      Timeout: 300
-      MemorySize: 256
-      AutoPublishAlias: DEV
-      Policies:
-        - AmazonS3FullAccess
-        - AmazonTextractFullAccess
-        - CloudWatchLogsFullAccess
-        - AWSLambdaBasicExecutionRole
-      Events:
-        MyApi:
-          Type: Api
-          Properties:
-            Path: /Hello
-            Method: get
-            
-  Function2:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./
-      FunctionName: PostFunction-GitHub
-      Handler: Lambda_function2.lambda_handler2
-      Runtime: python3.8
-      Timeout: 300
-      MemorySize: 256
-      AutoPublishAlias: DEV
-      Policies:
-        - AmazonS3FullAccess
-        - AmazonTextractFullAccess
-        - CloudWatchLogsFullAccess
-        - AWSLambdaBasicExecutionRole
-        - AmazonDynamoDBFullAccess
-      Events:
-        MyApi:
-          Type: Api
-          Properties:
-            Path: /customer
-            Method: post
+functions:
+  function1:
+    handler: Lambda_function.lambda_handler
+    runtime: python3.7
+    timeout: 300
+    memorySize: 256
+    Policies:
+      - AmazonS3FullAccess
+      - AmazonTextractFullAccess
+      - CloudWatchLogsFullAccess
+      - AWSLambdaBasicExecutionRole
+    events:
+     - http:
+          path: /Hello
+          method: get
+
+function:
+  function2:
+    handler: Lambda_function2.lambda_handler2
+    runtime: python3.7
+    timeout: 300
+    memorySize: 256
+    policies:
+      - AmazonS3FullAccess
+      - AmazonTextractFullAccess
+      - CloudWatchLogsFullAccess
+      - AWSLambdaBasicExecutionRole
+      - AmazonDynamoDBFullAccess
+    events:
+     - http:
+          path: /customer
+          method: post 
