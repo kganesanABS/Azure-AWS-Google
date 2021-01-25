@@ -18,6 +18,9 @@ on:
 jobs:
     build-and-deploy:
       runs-on: ubuntu-latest
+      strategy:
+      matrix:
+        python-version: [3.8]
       steps:
 
       - name: 'Checkout GitHub Action'
@@ -26,7 +29,7 @@ jobs:
       - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
         uses: actions/setup-python@v1
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}, ${{ matrix.python-version }}
           
       - name: 'Resolve Project Dependencies Using Pip'
         shell: bash
