@@ -8,11 +8,11 @@ provider:
       
 functions:
   function1:
-    handler: Lambda_function.lambda_handler
+    handler: Lambda_function../handler/aws.py
     runtime: python3.7
     timeout: 300
     memorySize: 256
-    Policies:
+    policies:
       - AmazonS3FullAccess
       - AmazonTextractFullAccess
       - CloudWatchLogsFullAccess
@@ -24,7 +24,7 @@ functions:
 
 function:
   function2:
-    handler: Lambda_function2.lambda_handler2
+    handler: Lambda_function2../handler/aws.py
     runtime: python3.7
     timeout: 300
     memorySize: 256
