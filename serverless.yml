@@ -5,7 +5,7 @@ provider:
   runtime: python3.7
   region: eu-central-1
       
-function:
+functions:
   function1:
     handler: Lambda_function.py
     runtime: python3.7
@@ -21,7 +21,7 @@ function:
           path: /Hello
           method: get
 
-function:
+functions:
   function2:
     handler: Lambda_function2.py
     runtime: python3.7
