@@ -6,7 +6,7 @@ provider:
   stage: dev
   region: eu-central-1
       
-functions:
+function:
   function1:
     handler: Lambda_function../handler/aws.py
     runtime: python3.7
