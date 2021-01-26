@@ -8,8 +8,7 @@ provider:
       
 function:
   function1:
-    handler: ../handler/aws.py
-    path: Lambda_function.py
+    handler: Lambda_function.py/handler/.aws.py
     runtime: python3.7
     timeout: 300
     memorySize: 256
@@ -25,8 +24,7 @@ function:
 
 function:
   function2:
-    handler: ../handler/aws.py
-    path: Lambda_function2.py
+    handler: Lambda_function2.py/handler/.aws.py
     runtime: python3.7
     timeout: 300
     memorySize: 256
