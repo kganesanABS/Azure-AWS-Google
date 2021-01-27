@@ -9,6 +9,9 @@ functions:
     runtime: python3.7
     timeout: 300
     memorySize: 256
+    package:
+      include:
+        - Lambda_function.py
     policies:
       - AmazonS3FullAccess
       - AmazonTextractFullAccess
@@ -24,6 +27,9 @@ functions:
     runtime: python3.7
     timeout: 300
     memorySize: 256
+    package:
+      include:
+        - Lambda_function2.py
     policies:
       - AmazonS3FullAccess
       - AmazonTextractFullAccess
