@@ -4,21 +4,23 @@ provider:
   runtime: python3.7
   region: eu-central-1 
   
-functions:
-  function1:
-    handler: handler/aws.lambda_handler
-    runtime: python3.7
-    timeout: 300
-    memorySize: 256
-    policies:
-      - AmazonS3FullAccess
-      - AmazonTextractFullAccess
-      - CloudWatchLogsFullAccess
-      - AWSLambdaBasicExecutionRole
-    events:
-      - http:
-          path: /Hello
-          method: get
+Function:
+  HelloWorldFunction-GitHub:
+      Handler: handler/aws.lambda_handler
+      Runtime: python3.7
+      Timeout: 300
+      MemorySize: 256
+      Policies:
+        - AmazonS3FullAccess
+        - AmazonTextractFullAccess
+        - CloudWatchLogsFullAccess
+        - AWSLambdaBasicExecutionRole
+      Events:
+        MyApi:
+          Type: Api
+          Properties:
+            Path: /Hello
+            Method: get
 #functions:
  # function2:
   #  handler: handler/aws.lambda_handler
