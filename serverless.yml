@@ -15,7 +15,7 @@ functions:
       - CloudWatchLogsFullAccess
       - AWSLambdaBasicExecutionRole
     events:
-     - http:
+      - http:
           path: /Hello
           method: get
 functions:
@@ -31,6 +31,6 @@ functions:
       - AWSLambdaBasicExecutionRole
       - AmazonDynamoDBFullAccess
     events:
-     - http:
+      - http:
           path: /customer
           method: post 
