@@ -5,7 +5,7 @@ provider:
   region: eu-central-1  
 functions:
   function1:
-    handler: handler/aws.py
+    handler: handler/aws.lambda_handler
     runtime: python3.7
     timeout: 300
     memorySize: 256
@@ -20,7 +20,7 @@ functions:
           method: get
 functions:
   function2:
-    handler: handler/aws.py
+    handler: handler/aws.lambda_handler
     runtime: python3.7
     timeout: 300
     memorySize: 256
