@@ -7,33 +7,33 @@ provider:
       
 functions:
   function1:
-      handler: /handler/.aws.py
-      runtime: python3.7
-      timeout: 300
-      memorySize: 256
-      policies:
-        - AmazonS3FullAccess
-        - AmazonTextractFullAccess
-        - CloudWatchLogsFullAccess
-        - AWSLambdaBasicExecutionRole
-      events:
-       - http:
-            path: /Hello
-            method: get
+    handler: /handler/.aws.py
+    runtime: python3.7
+    timeout: 300
+    memorySize: 256
+    policies:
+      - AmazonS3FullAccess
+      - AmazonTextractFullAccess
+      - CloudWatchLogsFullAccess
+      - AWSLambdaBasicExecutionRole
+    events:
+     - http:
+          path: /Hello
+          method: get
 
 functions:
   function2:
-      handler: /handler/.aws.py
-      runtime: python3.7
-      timeout: 300
-      memorySize: 256
-      policies:
-        - AmazonS3FullAccess
-        - AmazonTextractFullAccess
-        - CloudWatchLogsFullAccess
-        - AWSLambdaBasicExecutionRole
-        - AmazonDynamoDBFullAccess
-      events:
-       - http:
-            path: /customer
-            method: post 
+    handler: /handler/.aws.py
+    runtime: python3.7
+    timeout: 300
+    memorySize: 256
+    policies:
+      - AmazonS3FullAccess
+      - AmazonTextractFullAccess
+      - CloudWatchLogsFullAccess
+      - AWSLambdaBasicExecutionRole
+      - AmazonDynamoDBFullAccess
+    events:
+     - http:
+          path: /customer
+          method: post 
