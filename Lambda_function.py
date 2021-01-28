@@ -1,7 +1,5 @@
 import json
-
 import sys
-
 sys.path.append('handler/aws.py)
                 
 import aws.py
