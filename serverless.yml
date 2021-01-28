@@ -4,7 +4,7 @@ provider:
   runtime: python3.7
   region: eu-central-1 
   
-Function:
+Functions:
   HelloWorldFunction-GitHub:
       Handler: handler/aws.lambda_handler
       Runtime: python3.7
@@ -22,7 +22,6 @@ Function:
             Path: /Hello
             Method: get
 
-Function:
   PostFunction-GitHub:
       Handler: handler/aws.lambda_handler
       Runtime: python3.7
