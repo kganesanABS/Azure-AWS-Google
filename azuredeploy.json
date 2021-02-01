@@ -43,6 +43,10 @@
     "functions": [
   {
     "namespace": "GitHubFunction",
+    "templateLink": {
+          "uri":"https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/__init__.py",
+          "contentVersion":"1.0.0.0"
+    }
     "members": {
       "uniqueName": {
         "parameters": [
