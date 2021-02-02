@@ -33,7 +33,7 @@
     },
     "repoUrl": {
       "type": "string",
-      "defaultValue": "https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/AzureFunction.json",
+      "defaultValue": " ",
       "metadata": {
         "description": "Optional Git Repo URL"
       }
@@ -81,7 +81,7 @@
               "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
             ],
             "properties": {
-              "repoUrl": "[parameters('repoUrl')]",
+              "repoUrl": "[parameters('https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/AzureFunction.json')]",
               "branch": "master",
               "isManualIntegration": true
             }
