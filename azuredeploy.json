@@ -1,99 +1,93 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {},
-    "variables": {},
-    "resources": [
-        {
-            "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2018-07-01",
-            "name": "storageFunc",
-            "location": "[resourceGroup().location]",
-            "tags": {
-                "displayName": "storageFunc"
-            },
-            "sku": {
-                "name": "Standard_LRS"
-            },
-            "kind": "StorageV2"
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string",
+      "defaultValue": "[concat('webApp-', uniqueString(resourceGroup().id))]",
+      "minLength": 2,
+      "metadata": {
+        "description": "Web app name."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    },
+    "sku": {
+      "type": "string",
+      "defaultValue": "F1",
+      "metadata": {
+        "description": "The SKU of App Service Plan."
+      }
+    },
+    "linuxFxVersion": {
+      "type": "string",
+      "defaultValue": "python",
+      "metadata": {
+        "description": "The Runtime stack of current web app"
+      }
+    },
+    "repoUrl": {
+      "type": "string",
+      "defaultValue": "https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/AzureFunction.json",
+      "metadata": {
+        "description": "Optional Git Repo URL"
+      }
+    }
+  },
+  "variables": {
+    "appServicePlanPortalName": "[concat('AppServicePlan-', parameters('webAppName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2020-06-01",
+      "name": "[variables('appServicePlanPortalName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "[parameters('sku')]"
+      },
+      "kind": "linux",
+      "properties": {
+        "reserved": true
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2020-06-01",
+      "name": "[parameters('webAppName')]",
+      "location": "[parameters('location')]",
+
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]"
+      ],
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
+        "siteConfig": {
+          "linuxFxVersion": "[parameters('linuxFxVersion')]"
         },
-        {
-            "type": "Microsoft.Web/serverfarms",
-            "apiVersion": "2018-02-01",
-            "name": "servicePlan",
-            "location": "[resourceGroup().location]",
-            "kind": "linux",
-            "sku": {
-                "name": "Y1",
-                "tier": "Dynamic"
-            },
+        "resources": [
+          {
+            "condition": "[contains(parameters('repoUrl'),'http')]",
+            "type": "sourcecontrols",
+            "apiVersion": "2020-06-01",
+            "name": "web",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+              "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+            ],
             "properties": {
-                "name": "servicePlan",
-                "computeMode": "Dynamic"
-            },
-            "tags": {
-                "displayName": "servicePlan"
+              "repoUrl": "[parameters('repoUrl')]",
+              "branch": "master",
+              "isManualIntegration": true
             }
-        },
-         {
-              "apiVersion": "2015-08-01",
-              "type": "Microsoft.Web/sites",
-              "name": "functionApp",
-              "location": "[resourceGroup().location]",
-              "kind": "functionapp",
-              "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', 'servicePlan')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', 'storageFunc')]"
-              ],
-              "properties": {
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', 'servicePlan')]",
-                "siteConfig": {
-                  "appSettings": [
-                    {
-                      "name": "AzureWebJobsDashboard",
-                      "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', 'storageFunc', ';AccountKey=', listKeys('storageFunc','2015-05-01-preview').key1)]"
-                    },
-                    {
-                      "name": "AzureWebJobsStorage",
-                      "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', 'storageFunc', ';AccountKey=', listKeys('storageFunc','2015-05-01-preview').key1)]"
-                    },
-                    {
-                      "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-                      "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', 'storageFunc', ';AccountKey=', listKeys('storageFunc','2015-05-01-preview').key1)]"
-                    },
-                    {
-                      "name": "WEBSITE_CONTENTSHARE",
-                      "value": "storageFunc"
-                    },
-                    {
-                      "name": "FUNCTIONS_EXTENSION_VERSION",
-                      "value": "~3"
-                    },
-                    {
-                      "name": "FUNCTIONS_WORKER_RUNTIME",
-                      "value": "python"
-                    }
-                  ]
-                }
-              },
-              "resources": [
-                  {
-                      "apiVersion": "2015-08-01",
-                      "name": "web",
-                      "type": "sourcecontrols",
-                      "dependsOn": [
-                        "[resourceId('Microsoft.Web/sites/', 'functionApp')]"
-                      ],
-                      "properties": {
-                          "RepoUrl": "https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/AzureFunction.json",
-                          "branch": "master",
-                          "publishRunbook": true,
-                          "IsManualIntegration": true
-                      }
-                 }
-              ]
-            }
-        
-    ],
-    "outputs": {}
+          }
+        ]
+      }
+    }
+  ]
 }
