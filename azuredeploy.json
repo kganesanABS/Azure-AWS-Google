@@ -31,7 +31,7 @@
         "description": "The Runtime stack of current web app"
       }
     },
-    "repoUrl":'https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/AzureFunction.json' {
+    "repoUrl":"https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/AzureFunction.json" {
       "type": "string",
       "defaultValue": " ",
       "metadata": {
