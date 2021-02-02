@@ -63,7 +63,6 @@
         {
             "type": "Microsoft.Web/sites/sourcecontrols",
             "apiVersion": "2018-02-01",
-            "name": "[parameters('functionAppName')]",
             "properties":{
                 "repoUrl": "https://github.com/Palme240/Azure-AWS-Google/HttpFunction1/",
                 "branch": "main",
