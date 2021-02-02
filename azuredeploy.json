@@ -60,13 +60,16 @@
 ],
     "resources": [
         {
-            "type": "Microsoft.Web/sites/sourcecontrols",
-            "apiVersion": "2018-02-01",
-            "properties":{
-                "repoUrl": "https://github.com/Palme240/Azure-AWS-Google/HttpFunction1/",
-                "branch": "main",
-                "isManualIntegration": false,
-                "isGitHubAction": true
+            "name": "web",
+            "type": "sourcecontrols",
+            "apiVersion": "2015-08-01",
+            "dependsOn": [
+              "[resourceId('Microsoft.Web/sites', variables('webSiteName'))]"
+            ],
+            "properties": {
+              "RepoUrl": "[parameters('https://github.com/Palme240/Azure-AWS-Google/HttpFunction1/')]",
+              "branch": "[parameters('main')]",
+              "IsManualIntegration": true
             }
         },
         {
