@@ -49,7 +49,7 @@
           {
             "name": "namePrefix",
             "type": "string",
-            "RepoUrl": "[parameters('https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/AzureFunction.json')]",
+            "RepoUrl": "[parameters('https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/__init__.py')]",
             "branch": "[parameters('main')]",
             "IsManualIntegration": true
           }
