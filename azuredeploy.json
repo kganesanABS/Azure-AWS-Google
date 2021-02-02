@@ -34,7 +34,7 @@
         "description": "Location for Application Insights"
       }
     },
-    "runtime": {.
+    "runtime": {
       "type": "string",
       "defaultValue": "python",
       "allowedValues": [
