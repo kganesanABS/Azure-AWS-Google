@@ -62,7 +62,7 @@
     "resources": [
         {
             "type": "Microsoft.Web/sites",
-            "apiVersion": "2019-08-01",
+            "apiVersion": "2020-09-01",
             "name": "[parameters('functionAppName')]",
             "kind": "functionapp,linux",
             "location": "[parameters('location')]",
@@ -114,7 +114,7 @@
         },
         {
             "type": "Microsoft.Web/serverfarms",
-            "apiVersion": "2019-08-01",
+            "apiVersion": "2020-09-01",
             "name": "[variables('appServicePlanName')]",
             "location": "[parameters('location')]",
             "properties":{
@@ -128,7 +128,7 @@
         },
         {
             "type": "microsoft.insights/components",
-            "apiVersion": "2015-05-01",
+            "apiVersion": "2020-09-01",
             "name": "[variables('appInsightsName')]",
             "location": "[parameters('location')]",
             "kind": "web",
@@ -142,7 +142,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "name": "[parameters('storageAccountName')]",
-            "apiVersion": "2019-06-01",
+            "apiVersion": "2020-09-01",
             "location": "[parameters('location')]",
             "kind": "StorageV2",
             "sku": {
