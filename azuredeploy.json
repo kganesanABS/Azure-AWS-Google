@@ -64,14 +64,13 @@
             "type": "Microsoft.Web/sites/sourcecontrols",
             "apiVersion": "2020-09-01"
             },
-            "properties": 
-            {
+            "properties": {
                 "repoUrl": "https://github.com/Palme240/Azure-AWS-Google/HttpFunction1/",
                 "branch": "main",
                 "isManualIntegration": false,
                 "isGitHubAction": true
             }
-        }
+        },
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2019-08-01",
