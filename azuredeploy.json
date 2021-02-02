@@ -48,10 +48,7 @@
         "parameters": [
           {
             "name": "namePrefix",
-            "type": "string",
-            "RepoUrl": "[parameters('https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/__init__.py')]",
-            "branch": "[parameters('main')]",
-            "IsManualIntegration": true
+            "type": "string"
           }
         ],
         "output": {
@@ -79,6 +76,9 @@
             },
             "properties": {
                 "name": "[parameters('functionAppName')]",
+                "repoUrl": "https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/__init__.py",
+                "branch": "main",
+                "isGitHubAction": true,
                 "siteConfig": {
                     "appSettings": [
                         {
