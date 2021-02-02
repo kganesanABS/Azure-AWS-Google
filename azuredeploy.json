@@ -76,7 +76,7 @@
             },
             "properties": {
                 "name": "[parameters('functionAppName')]",
-                "repoUrl": "https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/__init__.py",
+                "repoUrl": "https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/AzureFunction.json",
                 "branch": "main",
                 "isGitHubAction": true,
                 "siteConfig": {
