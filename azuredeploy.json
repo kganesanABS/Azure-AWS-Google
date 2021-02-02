@@ -69,7 +69,8 @@
             "properties": {
               "RepoUrl": "[parameters('https://github.com/Palme240/Azure-AWS-Google/HttpFunction1/')]",
               "branch": "[parameters('main')]",
-              "IsManualIntegration": true
+              "IsManualIntegration": true,
+              "isGitHubAction": true
             }
         },
         {
