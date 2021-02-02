@@ -62,20 +62,13 @@
     "resources": [
         {
           "type": "Microsoft.Web/sites/sourcecontrols",
-          "apiVersion": "2020-09-01",
-          "kind": "string",
-          "systemData": {
-            "createdBy": "string",
-            "createdByType": "string",
-            "lastModifiedAt": "string"
+          "apiVersion": "2020-09-01"
           },
           "properties": {
-            "repoUrl": "https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/AzureFunction.json",
+            "repoUrl": "https://github.com/Palme240/Azure-AWS-Google/HttpFunction1/",
             "branch": "main",
             "isManualIntegration": true,
-            "isGitHubAction": true,
-            "deploymentRollbackEnabled": false,
-            "isMercurial": false
+            "isGitHubAction": true
           }
         }
         {
