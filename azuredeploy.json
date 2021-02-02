@@ -72,10 +72,10 @@
           "properties": {
             "repoUrl": "https://github.com/Palme240/Azure-AWS-Google/blob/main/HttpFunction1/AzureFunction.json",
             "branch": "main",
-            "isManualIntegration": "no",
-            "isGitHubAction": "True",
-            "deploymentRollbackEnabled": "false",
-            "isMercurial": "false"
+            "isManualIntegration": True,
+            "isGitHubAction": True,
+            "deploymentRollbackEnabled": false,
+            "isMercurial": false
           }
         }
         {
