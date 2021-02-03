@@ -20,8 +20,11 @@ jobs:
       runs-on: ubuntu-latest
       steps:
 
-      - name: 'Checkout GitHub Action'
+      - name: 'Checkout GitHub Action and python syntax'
         uses: actions/checkout@main
+        
+      - name: 'Check Syntax Python Code For Azure job'
+        uses: cclauss/Find-Python-syntax-errors-action@master
         
       - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
         uses: actions/setup-python@v1
@@ -62,6 +65,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       #does this mean that the files in my github repo are accessible by this YAML file?
       - uses: actions/checkout@v2
+      
+      - name: 'Check Syntax Python Code For AWS job'
+        uses: cclauss/Find-Python-syntax-errors-action@master
 
       #installs a version of python, but I need this if deploying to a severless Python Lambda?
       - name: Set up Python ${{ matrix.python-version }}
