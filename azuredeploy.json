@@ -7,7 +7,8 @@
             "defaultValue": "[concat('funcapp-', uniqueString(resourceGroup().id))]",
             "metadata": {
                 "description": "Name of the function app. <functionAppName>.azurewebsites.net"
-            },
+            }
+        },
         "storageAccountName": {
             "type": "String",
             "defaultValue": "[concat('funcapp', uniqueString(resourceGroup().id))]",
