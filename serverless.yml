@@ -20,8 +20,5 @@ Functions:
         - AWSLambdaBasicExecutionRole
       Events:
         MyApi:
-          Type: Api
-          Properties:
             Path: /Hello
             Method: get
-            
