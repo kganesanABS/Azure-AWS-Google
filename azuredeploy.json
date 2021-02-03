@@ -64,8 +64,8 @@
             "type": "Microsoft.Web/sites/sourcecontrols",
             "apiVersion": "2020-09-01",
             "properties": {
-              "RepoUrl": "[parameters('https://github.com/Palme240/Azure-AWS-Google/HttpFunction1/')]",
-              "branch": "[parameters('main')]",
+              "RepoUrl": "https://github.com/Palme240/Azure-AWS-Google.git",
+              "branch": "master",
               "IsManualIntegration": true,
               "isGitHubAction": true
             }
