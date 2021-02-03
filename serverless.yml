@@ -8,7 +8,7 @@ provider:
       
 Functions:
   function1:
-      Handler: Lambda_function.lambda_handler
+      Handler: ./HttpFunction1/AWSFunction.aws
       Runtime: python3.7
       Timeout: 300
       MemorySize: 256
@@ -25,21 +25,3 @@ Functions:
             Path: /Hello
             Method: get
             
-  Function2:
-      Handler: Lambda_function2.lambda_handler2
-      Runtime: python3.7
-      Timeout: 300
-      MemorySize: 256
-      AutoPublishAlias: DEV
-      Policies:
-        - AmazonS3FullAccess
-        - AmazonTextractFullAccess
-        - CloudWatchLogsFullAccess
-        - AWSLambdaBasicExecutionRole
-        - AmazonDynamoDBFullAccess
-      Events:
-        MyApi:
-          Type: Api
-          Properties:
-            Path: /customer
-            Method: post
