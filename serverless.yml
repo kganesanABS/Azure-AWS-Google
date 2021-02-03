@@ -1,19 +1,15 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-Description: Create an API gateway with triggered Lambda function
-Resources:
-  ApiResource:
-    Type: AWS::Serverless::Api
-    Properties:
-      StageName: Dev
+service: GitHubActions
+
+provider:
+  name: aws
+  runtime: python3.7
+  stage: dev
+  region: eu-central-1
       
-  Function:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./
-      FunctionName: HelloWorldFunction-GitHub
+Functions:
+  function1:
       Handler: Lambda_function.lambda_handler
-      Runtime: python3.8
+      Runtime: python3.7
       Timeout: 300
       MemorySize: 256
       AutoPublishAlias: DEV
@@ -28,15 +24,10 @@ Resources:
           Properties:
             Path: /Hello
             Method: get
-            RestApiId: !Ref ApiResource
             
   Function2:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./
-      FunctionName: PostFunction-GitHub
       Handler: Lambda_function2.lambda_handler2
-      Runtime: python3.8
+      Runtime: python3.7
       Timeout: 300
       MemorySize: 256
       AutoPublishAlias: DEV
@@ -52,4 +43,3 @@ Resources:
           Properties:
             Path: /customer
             Method: post
-            RestApiId: !Ref ApiResource   
