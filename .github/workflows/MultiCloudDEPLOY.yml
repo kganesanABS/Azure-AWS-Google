@@ -1,8 +1,5 @@
-name: AzureARMtemplateDeploy and AWS Github Python app
-env:
-  AZURE_FUNCTIONAPP_NAME: funcapp-jj4fl7pkmhioq
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-  PYTHON_VERSION: '3.7'
+name: Azure and Aws Deploy Python scripts
+
 
 # Controls when the action will run. 
 on:
@@ -12,48 +9,32 @@ on:
   pull_request:
     branches: [ main ]
 
-  workflow_dispatch:
+env:
+  AZURE_FUNCTIONAPP_NAME: GitHubFunction # set this to your application's name
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.'   # set this to the path to your web app project, defaults to the repository root
+  PYTHON_VERSION: '3.7'                 # set this to the python version to use (supports 3.6, 3.7, 3.8)
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-    build-and-deploy:
+    Azure:
       runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          python-version: [3.7]
       steps:
 
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
         
       - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v1
         with:
-          python-version: ${{ env.PYTHON_VERSION }} - ${{ matrix.python-version }}
+          python-version: ${{ env.PYTHON_VERSION }}
           
       - name: 'Resolve Project Dependencies Using Pip'
         shell: bash
         run: |
-          pushd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           python -m pip install --upgrade pip
           pip install -r requirements.txt --target=".python_packages/lib/site-packages"
           popd
-          pip install --pre azure-cosmos
-          npm install @azure/cosmos
-          npm i serverless-azure-functions
-          npm i serverless --save-dev
-          
-      - name: Deploy Azure Resource Manager (ARM) Template
-        id: DeployARM
-        uses: whiteducksoftware/azure-arm-action@v3.2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          deploymentName: GitHubActions-Deploy
-          resourceGroupName: GitHubARM
-          templateLocation: ./azuredeploy.json
-    
-      - name: Serverless
-        uses: serverless/github-action@master
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -61,15 +42,35 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
         
       - name: 'Run Azure Functions Action'
-        uses: Azure/functions-action@v1.1.8
-        id: Deploy_function
+        uses: Azure/functions-action@v1
+        id: fa
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          publish-profile:  ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
-      
- 
-    #credentials to connect to AWS
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+
+  # This workflow contains a single job called "build"
+    AWS:
+    # The type of runner that the job will run on
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          python-version: [3.8]    
+      # Steps represent a sequence of tasks that will be executed as part of the job
+      steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      #does this mean that the files in my github repo are accessible by this YAML file?
+      - uses: actions/checkout@v2
+
+      #installs a version of python, but I need this if deploying to a severless Python Lambda?
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+
+      #credentials to connect to AWS
       - name: Configure AWS credentials from Admin account
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -77,9 +78,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-central-1
           profile_name: default
-          runtime: python3.7
-    
-    # Runs a set of commands using the runners shell; THIS DOESN'T WORK
+          runtime: python3.8
+
+      # Runs a set of commands using the runners shell; THIS DOESN'T WORK
       - name: Run multiple commands for install environment
         run: |
            #install PIP
@@ -94,4 +95,4 @@ jobs:
       - name: Serverless
         uses: serverless/github-action@master
         with:
-          args: deploy --region eu-central-1
+          args: deploy --region eu-central-1 
