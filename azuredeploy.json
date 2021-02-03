@@ -8,9 +8,6 @@
             "metadata": {
                 "description": "Name of the function app. <functionAppName>.azurewebsites.net"
             },
-        "websiteName": {
-            "type": "string"
-        },
         "storageAccountName": {
             "type": "String",
             "defaultValue": "[concat('funcapp', uniqueString(resourceGroup().id))]",
@@ -65,8 +62,8 @@
         {
             "type": "Microsoft.Web/sites/sourcecontrols",
             "apiVersion": "2020-09-01",
-            "name": "websiteName",
             "properties": {
+              "name": "websiteName",
               "RepoUrl": "https://github.com/Palme240/Azure-AWS-Google.git",
               "branch": "master",
               "IsManualIntegration": true,
