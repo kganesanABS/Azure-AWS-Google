@@ -6,19 +6,19 @@ provider:
   stage: dev
   region: eu-central-1
       
-Functions:
+functions:
   function1:
-      Handler: ./HttpFunction1/AWSFunction.aws
-      Runtime: python3.7
-      Timeout: 300
-      MemorySize: 256
-      AutoPublishAlias: DEV
-      Policies:
+      handler: ./HttpFunction1/AWSFunction.aws
+      runtime: python3.7
+      timeout: 300
+      memorySize: 256
+      autoPublishAlias: DEV
+      policies:
         - AmazonS3FullAccess
         - AmazonTextractFullAccess
         - CloudWatchLogsFullAccess
         - AWSLambdaBasicExecutionRole
-      Events:
+      events:
         MyApi:
-            Path: /Hello
-            Method: get
+            path: /Hello
+            method: get
