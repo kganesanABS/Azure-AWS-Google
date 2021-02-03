@@ -63,7 +63,7 @@
         {
             "type": "Microsoft.Web/sites/sourcecontrols",
             "apiVersion": "2020-09-01",
-            "name": "[parameters('functionAppName')],
+            "name": "[parameters('functionAppName')]",
             "properties":{
               "RepoUrl": "https://github.com/Palme240/Azure-AWS-Google.git",
               "branch": "master",
