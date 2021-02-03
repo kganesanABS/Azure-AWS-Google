@@ -9,9 +9,6 @@
                 "description": "Name of the function app. <functionAppName>.azurewebsites.net"
             }
         },
-        "websiteName": {
-          "type": "string"
-        },
         "storageAccountName": {
             "type": "String",
             "defaultValue": "[concat('funcapp', uniqueString(resourceGroup().id))]",
@@ -66,10 +63,6 @@
         {
             "type": "Microsoft.Web/sites/sourcecontrols",
             "apiVersion": "2020-09-01",
-            "name": "[variables('webSiteName')]",
-            "dependsOn": [
-              "[resourceId('Microsoft.Web/sites', variables('webSiteName'))]"
-            ],
             "properties": {
               "RepoUrl": "[parameters('https://github.com/Palme240/Azure-AWS-Google/HttpFunction1/')]",
               "branch": "[parameters('main')]",
