@@ -9,6 +9,9 @@
                 "description": "Name of the function app. <functionAppName>.azurewebsites.net"
             }
         },
+        "websiteName": {
+          "type": "string"
+        },
         "storageAccountName": {
             "type": "String",
             "defaultValue": "[concat('funcapp', uniqueString(resourceGroup().id))]",
