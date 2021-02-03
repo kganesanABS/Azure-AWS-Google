@@ -19,6 +19,6 @@ functions:
         - CloudWatchLogsFullAccess
         - AWSLambdaBasicExecutionRole
       events:
-        - httpApi:
+        - restApi:
             path: /Hello
             method: get
