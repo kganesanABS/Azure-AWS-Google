@@ -20,7 +20,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
 
-      - name: 'Checkout GitHub Action and python syntax'
+      - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
         
       - name: 'Check Syntax Python Code For Azure job'
