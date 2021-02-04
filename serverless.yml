@@ -10,9 +10,6 @@ provider:
 package:
   individually: true
   
-plugins:
-  - serverless-python-requirements
-  
 functions:
   function1:
       codeUri: ./
