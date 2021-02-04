@@ -1,6 +1,6 @@
 import json
 import sys
-sys.path.append("./HttpFunction1/aws.py")
+sys.path.append('./HttpFunction1/aws'.py)
                 
 import aws.py
 
