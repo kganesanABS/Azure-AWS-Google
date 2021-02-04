@@ -6,6 +6,8 @@ provider:
   stage: dev
   region: eu-central-1
   endpointType: REGIONAL
+package:
+  individually: true
       
 functions:
   function1:
