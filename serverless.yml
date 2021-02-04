@@ -11,7 +11,7 @@ package:
       
 functions:
   function1:
-      handler: /HttpFunction1/aws.lambda_handler
+      handler: ./HttpFunction1/aws.lambda_handler
       runtime: python3.7
       timeout: 300
       memorySize: 256
