@@ -1,8 +1,4 @@
 import json
-import sys
-sys.path.append('./HttpFunction1/aws'.py)
-                
-import aws.py
 
 def response(message, status_code):
     return {
