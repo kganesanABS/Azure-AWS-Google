@@ -1,4 +1,6 @@
-from AWSFunction import response
+import AWSFunction
+
+AWSFunction.response()
 
 response()
 def lambda_handler(event, context):
