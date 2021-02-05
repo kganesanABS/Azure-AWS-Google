@@ -43,7 +43,7 @@ jobs:
         uses: montudor/action-zip@v0.1.0
 
       - name: Zip output
-        run: zip -r function.zip -x "AWS.py" "AWSFunction.py"
+        run: zip -r function.zip -x "/HttpFunction1/AWS*"
         working-directory: ../HttpFunction1/ 
       
       - name: Login to Azure
