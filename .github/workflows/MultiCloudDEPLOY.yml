@@ -39,11 +39,18 @@ jobs:
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
         
+      - name: Install zip
+        uses: montudor/action-zip@v0.1.0
+
+      - name: Zip output
+        run: zip -r function.zip -x "AWS.py" "AWSFunction.py"
+        working-directory: ../HttpFunction1/ 
+      
       - name: Login to Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
+          
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
@@ -51,7 +58,8 @@ jobs:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
-
+      
+ 
   # This workflow contains a single job called "build"
     AWS:
     # The type of runner that the job will run on
