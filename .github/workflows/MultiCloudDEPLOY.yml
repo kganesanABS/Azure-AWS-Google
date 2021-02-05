@@ -38,13 +38,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
+          zip -rx functionAzure.zip ./HttpFunction1/ AWS*.py
+          
         
-      - name: Install zip
-        uses: montudor/action-zip@v0.1.0
-
-      - name: Zip output
-        run: zip -r function.zip -x "./HttpFunction1/AWS*.py"
-        working-directory: ./HttpFunction1/ 
       
       - name: Login to Azure
         uses: azure/login@v1
