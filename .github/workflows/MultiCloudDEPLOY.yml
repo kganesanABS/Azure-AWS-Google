@@ -43,6 +43,7 @@ jobs:
         with:
           filename: 'release.zip'
           exclusions: '*.github/workflows* *README.md* *requirements.txt* *serverless.yml*'
+          inclusions: '*./HttpFunction1/__init__.py* *./HttpFunction1/function.json*'
         
       - name: Login to Azure
         uses: azure/login@v1
