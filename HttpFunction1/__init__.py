@@ -1,5 +1,5 @@
 import logging
-
+import azure-functions
 import azure.functions as func
 
 
