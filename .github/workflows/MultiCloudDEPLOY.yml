@@ -42,7 +42,7 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           filename: 'release.zip'
-          exclusions: '*.github/workflows* *README.md* *requirements.txt* *serverless.yml* *./HttpFunction1/AWS.py* *./HttpFunction1/AWSFunction.py*'
+          exclusions: '*.github/workflows* *README.md* *requirements.txt* *serverless.yml* */HttpFunction1/AWS.py* */HttpFunction1/AWSFunction.py*'
         
       - name: Login to Azure
         uses: azure/login@v1
