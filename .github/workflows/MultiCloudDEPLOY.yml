@@ -39,7 +39,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
-          zip -rx function.zip ../HttpFunction1/ "../HttpFunction1/AWS*" ".README.md" ".requirements.txt" ".serverless.yml" ".git/*"
+          zip -r function.zip ../HttpFunction1/ -x "../HttpFunction1/AWS*" ".README.md" ".requirements.txt" ".serverless.yml" ".git/*"
               
       - name: Login to Azure
         uses: azure/login@v1
