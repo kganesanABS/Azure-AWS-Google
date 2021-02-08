@@ -39,12 +39,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
-  
-      - name: Archive Release
-        uses: thedoctor0/zip-release@master
-        with:
-          filename: 'function.zip'
-          exclusions: '*.github/workflows* requirements.txt serverless.yml README.md'
+          zip -r function.zip HttpFunction1 -x "*/AWS*"
               
       - name: Login to Azure
         uses: azure/login@v1
