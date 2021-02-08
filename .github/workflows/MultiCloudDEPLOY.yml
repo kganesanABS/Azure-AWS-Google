@@ -22,6 +22,7 @@ jobs:
 
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
+        
 
       - name: 'Check Syntax Python Code For Azure job'
         uses: cclauss/Find-Python-syntax-errors-action@master
@@ -39,12 +40,12 @@ jobs:
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
   
-      - uses: actions/checkout@v2
-      - uses: papeloto/action-zip@v1
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
         with:
-          files: HttpFunction1/AZURE*
-          dest: Function.zip
-          
+          filename: 'function.zip'
+          exclusions: '*.github/workflows* requirements.txt serverless.yml README.md'
+              
       - name: Login to Azure
         uses: azure/login@v1
         with:
