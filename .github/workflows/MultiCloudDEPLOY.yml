@@ -37,9 +37,19 @@ jobs:
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
-          popd  
+          popd
+            
         
-      
+      - name: Building web app
+        uses: azure/appservice-build@v2
+        
+      - name: Deploy web App using GH Action azure/webapps-deploy
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        
       - name: Login to Azure
         uses: azure/login@v1
         with:
