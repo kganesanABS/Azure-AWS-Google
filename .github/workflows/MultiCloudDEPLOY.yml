@@ -51,7 +51,7 @@ jobs:
         with:
           azcliversion: 2.0.72
           inlineScript: |
-                  az functionapp deployment source config-zip -g ${GitHubARM} -n ${GitHubFunction} --src function.zip
+             az functionapp deployment source config-zip -g GitHubARM -n GitHubFunction --src function.zip
                   
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
