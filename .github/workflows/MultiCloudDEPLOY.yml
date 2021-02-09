@@ -51,9 +51,9 @@ jobs:
           azcliversion: 2.0.72
           inlineScript: |
             az functionapp deployment source config \
-              --name GitHubFunction \
+              --name $ GitHubFunction \
               --resource-group GitHubARM \
-              --repo-url https://github.com/Palme240/Azure-AWS-Google/tree/main/HttpFunction1 \
+              --repo-url $ https://github.com/Palme240/Azure-AWS-Google/tree/main/HttpFunction1 \
               --branch main \
               --manual-integration    
           
