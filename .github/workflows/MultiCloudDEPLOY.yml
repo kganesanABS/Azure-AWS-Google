@@ -54,7 +54,7 @@ jobs:
               --name GitHubFunction \
               --resource-group GitHubARM \
               --repo-url https://github.com/Palme240/Azure-AWS-Google/tree/main/HttpFunction1 \
-              --branch master \
+              --branch main \
               --manual-integration    
           
       - name: 'Run Azure Functions Action'
