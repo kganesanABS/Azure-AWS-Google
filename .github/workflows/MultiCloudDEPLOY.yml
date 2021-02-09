@@ -39,7 +39,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
-          zip -r function.zip ../HttpFunction1/
+          zip -r function.zip -i ../HttpFunction1/
               
       - name: Login to Azure
         uses: azure/login@v1
