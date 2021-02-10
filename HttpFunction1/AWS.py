@@ -1,6 +1,6 @@
 import json
 import sys
-sys.path.append('/HttpFunction1/AWSFunction')
+sys.path.append('HttpFunction1/AWSFunction')
 from AWSFunction import response
 
 def lambda_handler(event, context):
