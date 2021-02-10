@@ -39,10 +39,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
-          zip -r function.zip ./HttpFunction1/AZURE*
-          npm install -g azure-functions-pack
-          funcpack pack ./HttpFunction1
-          func azure functionapp publish GitHubFunction 
+          zip -r function.zip ./HttpFunction1/AZURE*.*
               
       - name: Login to Azure
         uses: azure/login@v1
