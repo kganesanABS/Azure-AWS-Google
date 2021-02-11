@@ -44,7 +44,7 @@ jobs:
       - uses: chabad360/hugo-actions@master
       - uses: bacongobbler/azure-blob-storage-upload@v1.1.1
         with:
-          source_dir: 'HttpFunction1/AZURE*.*'
+          source_dir: './HttpFunction1/AZURE*.*'
           container_name: '$FunctionZIP'
           connection_string: ${{ secrets.AZURE_CONNECTION_STRING }}
           sync: true
