@@ -2,7 +2,7 @@ service: azure-serverless-python
 
 provider:
   name: azure
-  region: West-Eu
+  region: West EU
   runtime: python3.7 # python3.7 or python3.8 available
   subscriptionId: 41fcdc9b-0389-4f48-a8a0-de2870a3212d
   stage: dev
