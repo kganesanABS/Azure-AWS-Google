@@ -50,7 +50,7 @@ jobs:
           container_name: $function
           local_directory: ./HttpFunction1/AZURE.*
           http_headers: |
-            - glob: "**/*.py"
+           - glob: "**/*.py"
               headers:
                 Cache-Control: public, max-age=604800, immutable
                 Content-Type: application/javascript
@@ -58,7 +58,7 @@ jobs:
                 Content-Language: fr-CA
                 Content-Disposition: inline
 
-            - glob: "**/*":
+           - glob: "**/*":
               headers:
                 Cache-Control: public, no-cache
             
