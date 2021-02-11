@@ -58,7 +58,7 @@ jobs:
                 Content-Language: fr-CA
                 Content-Disposition: inline
 
-            - glob: "**/*":
+            - glob: "**/*"
               headers:
                 Cache-Control: public, no-cache
             
