@@ -10,24 +10,13 @@ provider:
 
 # you can add packaging information here
 package:
-   include:
-    - ./HttpFunction1/AZURE*.*
+  include:
+   - HttpFunction1/AZURE*.*
    
   exclude:
-    - env/**
-    - .env/**
-    - local.settings.json
-    - .vscode/**
-    - __pycache__/**
-    - node_modules/**
-    - .python_packages/**
-    - .funcignore
-    - package.json
-    - package-lock.json
-    - .gitignore
-    - .git/**
-  # - exclude-me.py
-  # - exclude-me-dir/**
+   - README.md
+   - requirements.txt
+   - .github/**
 
 functions:
   hello:
