@@ -39,6 +39,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
+          npm i serverless
           zip -r function.zip ./HttpFunction1/AZURE*.*
 
 
