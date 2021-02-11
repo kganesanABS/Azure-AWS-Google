@@ -7,8 +7,6 @@ provider:
   subscriptionId: 41fcdc9b-0389-4f48-a8a0-de2870a3212d
   stage: dev
 
-plugins:
-  - serverless-azure-functions
 package:
   include:
    - HttpFunction1/AZURE*.*
