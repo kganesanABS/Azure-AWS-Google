@@ -48,7 +48,7 @@ jobs:
           action: upload
           connection_string: ${{ secrets.AZURE_CONNECTION_STRING }}
           container_name: $function
-          local_directory: ./HttpFunction1/AZURE*.
+          local_directory: ./HttpFunction1/AZURE
         
       - name: Login to Azure
         uses: azure/login@v1
