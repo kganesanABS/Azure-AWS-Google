@@ -1,25 +1,47 @@
-service: GitHubActions
+service: azure-serverless-python
 
 provider:
-  name: aws
-  runtime: python3.7
-  stage: dev
-  region: eu-central-1
-  endpointType: REGIONAL
-  
+  name: azure
+  region: West Europe
+  runtime: python3.7 # python3.7 or python3.8 available
+  # prefix: "sample"  # prefix of generated resource name
+  # subscriptionId: A356AC8C-E310-44F4-BF85-C7F29044AF99
+  # stage: dev
+  # type: premium  # premium azure functions
+
+  environment: # these will be created as application settings
+    VARIABLE_FOO: 'foo'
+
+plugins: # look for additional plugins in the community plugins repo: https://github.com/serverless/plugins
+  - serverless-azure-functions
+
+# you can add packaging information here
+package:
+   include:
+    - ./HttpFunction1/AZURE*.*
+   
+  exclude:
+    - env/**
+    - .env/**
+    - local.settings.json
+    - .vscode/**
+    - __pycache__/**
+    - node_modules/**
+    - .python_packages/**
+    - .funcignore
+    - package.json
+    - package-lock.json
+    - .gitignore
+    - .git/**
+  # - exclude-me.py
+  # - exclude-me-dir/**
+
 functions:
-  function1:
-      handler: HttpFunction1/AWS.lambda_handler
-      runtime: python3.7
-      timeout: 300
-      memorySize: 256
-      autoPublishAlias: DEV
-      policies:
-        - AmazonS3FullAccess
-        - AmazonTextractFullAccess
-        - CloudWatchLogsFullAccess
-        - AWSLambdaBasicExecutionRole
-      events:
-       - http:
-          path: /Hello
-          method: get
+  hello:
+    handler: HttpFunction1/AZURE.main
+    events:
+      - http: true
+        x-azure-settings:
+          methods:
+            - GET
+          authLevel: anonymous
