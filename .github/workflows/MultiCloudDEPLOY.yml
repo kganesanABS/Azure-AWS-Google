@@ -40,7 +40,17 @@ jobs:
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
           zip -r function.zip ./HttpFunction1/AZURE*.*
-              
+          npm i
+          npm run bundle
+      
+      - name: Azure Versioned Storage Upload
+        uses: runlyio/azure-versioned-storage@v2.0.0
+        with:
+          sourceDir: ../HttpFunction1/AZURE*.*
+          version: v${{ env.PYTHON_VERSION }}
+          container: ZipFunctionAZ
+          connectionString: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+        
       - name: Login to Azure
         uses: azure/login@v1
         with:
