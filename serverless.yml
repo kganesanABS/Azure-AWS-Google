@@ -4,16 +4,9 @@ provider:
   name: azure
   region: West Europe
   runtime: python3.7 # python3.7 or python3.8 available
-  # prefix: "sample"  # prefix of generated resource name
-  # subscriptionId: A356AC8C-E310-44F4-BF85-C7F29044AF99
-  # stage: dev
-  # type: premium  # premium azure functions
-
-  environment: # these will be created as application settings
-    VARIABLE_FOO: 'foo'
-
-plugins: # look for additional plugins in the community plugins repo: https://github.com/serverless/plugins
-  - serverless-azure-functions
+  subscriptionId: 41fcdc9b-0389-4f48-a8a0-de2870a3212d
+  stage: dev
+  type: consumption
 
 # you can add packaging information here
 package:
