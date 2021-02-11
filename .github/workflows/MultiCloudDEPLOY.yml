@@ -39,7 +39,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
-          npm install serverless-azure-functions
           zip -r function.zip ./HttpFunction1/AZURE*.*
 
 
@@ -47,7 +46,7 @@ jobs:
       - name: Serverless
         uses: serverless/github-action@master
         with:
-          args: deploy --region West Europe
+          args: deploy 
           
       - name: Login to Azure
         uses: azure/login@v1
