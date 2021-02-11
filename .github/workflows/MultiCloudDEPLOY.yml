@@ -49,14 +49,19 @@ jobs:
           connection_string: ${{ secrets.AZURE_CONNECTION_STRING }}
           container_name: $function
           local_directory: ./HttpFunction1/AZURE.*
-            - glob: "**/*.????????.*"
+          http_headers: |
+            - glob: "**/*.py"
               headers:
                 Cache-Control: public, max-age=604800, immutable
+                Content-Type: application/javascript
+                Content-Encoding: gzip
+                Content-Language: fr-CA
+                Content-Disposition: inline
 
-            - glob: "**/*"
+            - glob: "**/*":
               headers:
-                Cache-Control: public, max-age=120, s-maxage=180, proxy-revalidate
-        
+                Cache-Control: public, no-cache
+            
       - name: Login to Azure
         uses: azure/login@v1
         with:
