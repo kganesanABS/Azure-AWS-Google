@@ -60,9 +60,7 @@ jobs:
     AWS:
     # The type of runner that the job will run on
       runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          python-version: [3.7]    
+  
       # Steps represent a sequence of tasks that will be executed as part of the job
       steps:
 
@@ -74,10 +72,10 @@ jobs:
         uses: cclauss/Find-Python-syntax-errors-action@master
 
       #installs a version of python, but I need this if deploying to a severless Python Lambda?
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python ${{ env.PYTHON_VERSION }} Environment
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ env.PYTHON_VERSION }}
 
 
       #credentials to connect to AWS
