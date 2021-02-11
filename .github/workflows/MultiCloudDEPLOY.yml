@@ -42,12 +42,12 @@ jobs:
           zip -r function.zip ./HttpFunction1/AZURE*.*
 
 
-      - name: Deploy to Azure
-        uses: TravisSpomer/deploy-to-azure-storage@v1.3.0
+       #Deploy main.py to AWS
+      - name: Serverless
+        uses: serverless/github-action@master
         with:
-          source-path: HttpFunction1/AZURE*.*
-          sas-url: ${{ secrets.DEPLOY_SAS_URL }}
-               
+          args: deploy --region West Europe
+          
       - name: Login to Azure
         uses: azure/login@v1
         with:
