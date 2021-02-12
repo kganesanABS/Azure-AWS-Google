@@ -43,12 +43,6 @@ jobs:
           zip -r function.zip ./HttpFunction1/AZURE*.*
 
 
-       #Deploy main.py to AWS
-      - name: Serverless
-        uses: serverless/github-action@master
-        with:
-          args: deploy 
-          
       - name: Login to Azure
         uses: azure/login@v1
         with:
