@@ -5,11 +5,10 @@ name: Azure and Aws Deploy Python scripts
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ main ]
+    branches:
      - feature/task14-AutoDeployAzureFunctions
   pull_request:
     branches: [ main ]
-     - feature/task14-AutoDeployAzureFunctions
 
 env:
   AZURE_FUNCTIONAPP_NAME: GitHubFunction # set this to your application's name
