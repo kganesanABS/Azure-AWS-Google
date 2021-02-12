@@ -39,10 +39,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
-          npm i serverless
           zip -r function.zip ./HttpFunction1/AZURE*.*
 
-
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.0.72
+          inlineScript: |
+            func start --language-worker python --script-root HttpFunction1/AZURE*.*
+            
       - name: Login to Azure
         uses: azure/login@v1
         with:
