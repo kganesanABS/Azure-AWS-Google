@@ -46,15 +46,33 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-                  
+           
+      # Get the publish profile
+      - name: Azure App Service Publish Profile
+        uses: aliencube/publish-profile-actions@v1.2.0
+        id: publishprofile
+        with:
+          # Resource group name.
+          resourceGroupName: ${{ env.RESOURCE_GROUP }}
+          # App instance name.
+          appName: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+                 
       - name: 'Run Azure Functions Action'
-        uses: Azure/functions-action@v1
-        id: fa
+        uses: Azure/functions-action@v1.1.8
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+          publish-profile: ${{ steps.publishprofile.outputs.profile }} 
+          
+      - name: Azure App Service Publish Profile
+        uses: aliencube/publish-profile-actions@v1.2.0
+        with:
+          # Resource group name.
+          resourceGroupName: ${{ env.RESOURCE_GROUP }}
+          # App instance name.
+          appName: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          # Value indicating whether to reset the publish profile or not.        
+          reset: true  
       
  
   # This workflow contains a single job called "build"
