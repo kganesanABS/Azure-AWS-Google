@@ -1,6 +1,8 @@
 import logging
+import sys
 
-import azure.functions as func
+from AZURE_Functions.AZURE.AZUREFunction import response
+
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
