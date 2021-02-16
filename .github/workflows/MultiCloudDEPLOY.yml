@@ -43,7 +43,7 @@ jobs:
         uses: azure/appservice-build@v2
         with:
           platform: Azure
-          platform-version: python 3.8
+          platform-version: python3.8
           source-directory: ./AZURE_Functions
 
 
