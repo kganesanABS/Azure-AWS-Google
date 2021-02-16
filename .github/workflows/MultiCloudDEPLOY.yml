@@ -42,8 +42,8 @@ jobs:
       - name: Building web app
         uses: azure/appservice-build@v2
         with:
-          platform: Azure
-          platform-version: python3.8
+          platform: python
+          platform-version: 3.7
           source-directory: ./AZURE_Functions
 
 
