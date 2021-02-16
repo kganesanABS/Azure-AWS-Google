@@ -39,20 +39,8 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
       
-      - name: Building web app
-        uses: azure/appservice-build@v2
-        with:
-          platform: python
-          platform-version: 3.7
-          source-directory: ./AZURE_Functions
-
-
-      - name: Deploying web app to Azure
-        uses: azure/webapps-deploy@v1
-        with:
-          app-name: DeployGitHubFunction
-          publish-profile: ${{ secrets.AZURE_WEB_APP_PUBLISH_PROFILE }}
-           
+      
+         
       - name: 'Resolve Project Dependencies Using Pip'
         shell: bash
         run: |
