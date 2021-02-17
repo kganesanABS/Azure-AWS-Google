@@ -55,7 +55,8 @@ jobs:
         with:
           azcliversion: 2.0.72
           inlineScript: |
-            func azure functionapp publish GitHubFunction
+            func azure functionapp publish GitHubFunction --nozip
+            
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         with:
