@@ -50,7 +50,12 @@ jobs:
           popd
             
            
-                 
+      - name: Azure CLI Action
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.0.72
+          inlineScript: |
+            func azure functionapp publish GitHubFunction
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         with:
