@@ -55,7 +55,7 @@ jobs:
         with:
           azcliversion: 2.0.72
           inlineScript: |
-            az func azure functionapp publish GitHubFunction --nozip
+            az functionapp deployment source config --branch master --manual-integration --app-working-dir ./AZURE_Functions --name GitHubFunction --repo-url https://github.com/Palme240/Azure-AWS-Google/ --resource-group GitHubARM
             
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
