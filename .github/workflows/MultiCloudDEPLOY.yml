@@ -55,7 +55,7 @@ jobs:
         with:
           azcliversion: 2.0.72
           inlineScript: |
-            az functionapp deployment source config-zip --src ./AZURE_Functions/ --build-remote {false} --name GitHubFunction --resource-group -g GitHubARM
+            az functionapp deployment source config-zip --src ./AZURE_Functions/ --build-remote {false} --name GitHubFunction --resource-group GitHubARM
             
             
       - name: 'Run Azure Functions Action'
