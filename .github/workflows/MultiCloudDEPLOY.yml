@@ -48,6 +48,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
           popd
+          zip -r GitFunction.zip ./AZURE_Functions
             
            
       - name: Azure CLI Action
@@ -55,12 +56,8 @@ jobs:
         with:
           azcliversion: 2.0.72
           inlineScript: |
-            az functionapp deployment source config --name GitHubFunction \
-             --resource-group GitHubARM \
-             --repo-url https://github.com/Palme240/Azure-AWS-Google \
-             --branch master --location ./AZURE_Functions \
-             --manual-integration 
-            
+            az functionapp deployment source config-zip -g GitHubARM -n GitHubFunction --src GitFunction.zip
+
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         with:
