@@ -47,16 +47,10 @@ jobs:
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           python -m pip install --upgrade pip
           pip install -r ../requirements.txt --target=".python_packages/lib/site-packages"
+          npm run build --if-present
+          npm run test --if-present
           popd
-          zip -r GitFunction.zip ./AZURE_Functions
             
-           
-      - name: Azure CLI Action
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.0.72
-          inlineScript: |
-            az functionapp deployment source config-zip -g GitHubARM -n GitHubFunction --src GitFunction.zip
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
