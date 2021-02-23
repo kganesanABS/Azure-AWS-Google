@@ -3,6 +3,8 @@
 README.md
 requirements.txt
 serverless.yml
+host.json
+proxies.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
