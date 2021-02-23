@@ -43,7 +43,7 @@ jobs:
         app-name: 'GitHubFunction'
         slot-name: 'production'
         package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_a45acfa51af64fb5bf9e84ef80be3ad7 }}
+        publish-profile: ${{ secrets.secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
         
     # This workflow contains a single job called "build"
   AWS:
