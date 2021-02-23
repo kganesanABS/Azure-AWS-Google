@@ -4,12 +4,12 @@
 name: Deploy Python to Azure - and AWS
 
 on:
- workflow_dispatch:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
   PYTHON_VERSION: '3.7' # set this to the python version to use (supports 3.6, 3.7, 3.8)
