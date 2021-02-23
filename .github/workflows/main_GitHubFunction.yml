@@ -3,6 +3,7 @@ name: Azure and Aws Deploy Python script
 
 # Controls when the action will run. 
 on:
+ workflow_dispatch:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ main ]
