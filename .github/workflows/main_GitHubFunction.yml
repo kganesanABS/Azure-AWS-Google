@@ -1,17 +1,15 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Python project to Azure Function App - and AWS Serverless Project
+name: Deploy Python to Azure - and AWS
 
 on:
  workflow_dispatch:
+  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
-
+    branches: [ main ]
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
   PYTHON_VERSION: '3.7' # set this to the python version to use (supports 3.6, 3.7, 3.8)
@@ -22,6 +20,9 @@ jobs:
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@master
+      
+    - name: 'Check Syntax Python Code For Azure job'
+      uses: cclauss/Find-Python-syntax-errors-action@master
 
     - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
       uses: actions/setup-python@v1
