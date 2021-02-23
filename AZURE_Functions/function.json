@@ -1,5 +1,5 @@
 {
-    "scriptFile": "AZURE.py",
+    "scriptFile": "AzureFunction.py",
     "bindings": [
         {
             "authLevel": "function",
