@@ -1,5 +1,5 @@
 {
-    "scriptFile": "AZURE.py",
+    "scriptFile": "__init__.py",
     "bindings": [
         {
             "authLevel": "function",
