@@ -1,1 +1,7 @@
+.git*
+.vscode
+local.settings.json
+test
 .venv
+AWS_Functions
+serverless.yml
