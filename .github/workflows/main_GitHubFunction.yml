@@ -22,9 +22,6 @@ jobs:
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@master
-      
-    - name: 'Check Syntax Python Code For Azure job'
-      uses: cclauss/Find-Python-syntax-errors-action@master
 
     - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
       uses: actions/setup-python@v1
