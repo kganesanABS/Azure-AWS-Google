@@ -1,5 +1,5 @@
 .git*
-./AWS_Functions
+AWS_Functions
 README.md
 requirements.txt
 serverless.yml
