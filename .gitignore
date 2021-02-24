@@ -1,8 +1,3 @@
-.git*
-./AWS_Functions
-README.md
-requirements.txt
-serverless.yml
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
