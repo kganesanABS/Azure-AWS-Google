@@ -3,3 +3,6 @@
 local.settings.json
 test
 .venv
+AWS_Functions
+README.md
+serverless.yml
