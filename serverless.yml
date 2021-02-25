@@ -6,7 +6,15 @@ provider:
   stage: dev
   region: eu-central-1
   endpointType: REGIONAL
-
+  package:
+    exclude:
+     - .git*/**
+     - .vscode/**
+     - AZURE_Functions/**
+     - host.json
+     - proxies.json
+     - .gitignore
+     - .funcignore
 
 functions:
   hello:
