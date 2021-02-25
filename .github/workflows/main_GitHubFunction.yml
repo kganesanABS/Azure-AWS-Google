@@ -38,6 +38,6 @@ jobs:
       id: fa
       with:
         app-name: 'GitHubFunction'
-        slot-name: 'prod'
+        slot-name: 'production'
         package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_c40b6dbf2d1642a1b86f9e4d3d6fee43 }}
