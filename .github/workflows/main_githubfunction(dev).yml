@@ -40,4 +40,4 @@ jobs:
         app-name: 'githubfunction'
         slot-name: 'dev'
         package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_a73bd6ab727041c29e95bb09ef49439c }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_55b7621b766942728e16eec0537d0e70 }}
