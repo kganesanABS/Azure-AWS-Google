@@ -19,6 +19,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
     else:
         return func.HttpResponse(
-             "This HTTP triggered function executed successfully. The GitHub Worflow is sync with Azure !.",
+             "This HTTP triggered function executed successfully. The GitHub repo is sync with Azure !",
              status_code=200
         )
