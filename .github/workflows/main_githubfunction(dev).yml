@@ -79,6 +79,7 @@ jobs:
       with:
         name: function-1
         runtime: python3.8
+        region: europe-west1
         credentials: ${{ secrets.GCP_KEY }}
   AWS:
   # The type of runner that the job will run on
