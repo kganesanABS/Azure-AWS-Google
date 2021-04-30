@@ -64,6 +64,14 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Setup GCP Service Account
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: 'latest'
+        service_account_email: ${{ secrets.GCP_EMAIL }}
+        service_account_key: ${{ secrets.GCP_KEY }}
+        export_default_credentials: true
 
     - uses: actions/checkout@v2
     - id: deploy
@@ -71,7 +79,7 @@ jobs:
       with:
         name: function-1
         runtime: python3.8
-        credentials: ${{ secrets.GCP_CREDENTIALS }}
+        credentials: ${{ secrets.GCP_KEY }}
   AWS:
   # The type of runner that the job will run on
     runs-on: ubuntu-latest
