@@ -65,13 +65,18 @@ jobs:
       with:
         python-version: ${{ env.PYTHON_VERSION }}
         
+    - name: Run
+      run: |
+        gcloud functions deploy product-availability-checker \
+          --region europe-west1 \
+          --source https://source.developers.google.com/projects/idyllic-chimera-298910/repos/default/revisions//paths/Google_Functions  
+        
     - name: Setup GCP Service Account
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      uses: google-github-actions/setup-gcloud@master
       with:
-        version: 'latest'
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_email: ${{ secrets.GCP_EMAIL }}
         service_account_key: ${{ secrets.GCP_KEY }}
-        export_default_credentials: true
 
     - uses: actions/checkout@v2
     - id: deploy
