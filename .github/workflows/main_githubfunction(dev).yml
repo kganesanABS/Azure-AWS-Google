@@ -65,19 +65,19 @@ jobs:
       with:
         python-version: ${{ env.PYTHON_VERSION }}
         
+    - name: Setup GCP Service Account
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_email: ${{ secrets.GCP_EMAIL }}
+        service_account_key: ${{ secrets.GCP_KEY }}    
+        
     - name: Run
       run: |
         gcloud functions deploy function-1 \
           --project idyllic-chimera-298910 \
           --region europe-west1 \
           --source https://source.developers.google.com/projects/idyllic-chimera-298910/repos/default/revisions//paths/Google_Functions  
-        
-    - name: Setup GCP Service Account
-      uses: google-github-actions/setup-gcloud@master
-      with:
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
-        service_account_email: ${{ secrets.GCP_EMAIL }}
-        service_account_key: ${{ secrets.GCP_KEY }}
 
     - uses: actions/checkout@v2
     - id: deploy
