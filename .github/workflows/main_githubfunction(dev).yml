@@ -75,8 +75,9 @@ jobs:
         
     - name: Deploy the function
       run: |
-        gcloud config unset project 
+        gcloud config set project My First Project
         gcloud functions deploy /Google_Functions/main.py \
+          --project idyllic-chimera-298910 \
           --region europe-west1 \
           --source https://source.developers.google.com/projects/idyllic-chimera-298910/repos/default/revisions//paths/Google_Functions  
 
