@@ -77,8 +77,9 @@ jobs:
       run: |
         gcloud functions deploy /Google_Functions/main.py \
           --region europe-west1 \
-          --source https://source.developers.google.com/projects/idyllic-chimera-298910/repos/default/revisions//paths/Google_Functions  
-
+          --source https://source.developers.google.com/projects/idyllic-chimera-298910/repos/default/revisions//paths/Google_Functions \ 
+          --trigger-http \
+          --runtime=python38 \
     - uses: actions/checkout@v2
     - id: deploy
       uses: google-github-actions/deploy-cloud-functions@main
