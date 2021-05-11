@@ -66,7 +66,7 @@ jobs:
         python-version: ${{ env.PYTHON_VERSION }}
         
     - name: Setup GCP Service Account
-      uses: google-github-actions/setup-gcloud@v0.2.0
+      uses: google-github-actions/setup-gcloud@master
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_email: ${{ secrets.GCP_EMAIL }}
