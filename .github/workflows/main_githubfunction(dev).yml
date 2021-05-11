@@ -76,7 +76,7 @@ jobs:
     - name: Deploy the function
       run: |
         gcloud functions deploy /Google_Functions/main.py \
-          --project_id ${{ 295187873599 }} \
+          --project_id ${{ env.295187873599 }} \
           --region europe-west1 \
           --source https://source.developers.google.com/projects/idyllic-chimera-298910/repos/default/revisions//paths/Google_Functions  
 
