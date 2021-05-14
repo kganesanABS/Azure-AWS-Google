@@ -73,16 +73,13 @@ jobs:
         service_account_key: ${{ secrets.GCP_KEY }}    
         export_default_credentials: true
     - name: Deploy the function
-      run: |
-        gcloud functions deploy function-Github \
-          --region europe-west1 \
-          --source https://source.developers.google.com/projects/idyllic-chimera-298910/repos/default/revisions//paths/Google_Functions \ 
+      run: gcloud functions deploy function-Github --trigger-http --runtime=python38 
 
     - uses: actions/checkout@v2
     - id: deploy
       uses: google-github-actions/deploy-cloud-functions@main
       with:
-        name: function-1
+        name: function-github
         runtime: python3.8
         region: europe-west1
         credentials: ${{ secrets.GCP_KEY }}
