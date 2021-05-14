@@ -73,16 +73,9 @@ jobs:
         service_account_key: ${{ secrets.GCP_KEY }}    
         export_default_credentials: true
     - name: Deploy the function
-      run: gcloud functions deploy function-Github --trigger-http --runtime=python38 
+      run: gcloud functions deploy function-Github --trigger-http --runtime=python38 --source=./Google_Functions/main.py --region=europe-west1
+           gcloud alpha functions add-iam-policy-binding function-Github --member=allUsers --role=roles/cloudfunctions.invoker
 
-    - uses: actions/checkout@v2
-    - id: deploy
-      uses: google-github-actions/deploy-cloud-functions@main
-      with:
-        name: function-github
-        runtime: python3.8
-        region: europe-west1
-        credentials: ${{ secrets.GCP_KEY }}
   AWS:
   # The type of runner that the job will run on
     runs-on: ubuntu-latest
