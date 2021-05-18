@@ -75,7 +75,7 @@ jobs:
         
     - name: Deploy the function
       run: |
-        gcloud functions deploy function-Github --trigger-http --runtime=python38 --source=Google_Functions/ --region=europe-west1
+        gcloud functions deploy function-Github --trigger-http --runtime=python38 --source=Google_Functions/main.py --region=europe-west1
         gcloud alpha functions add-iam-policy-binding function-Github --member=allUsers --role=roles/cloudfunctions.invoker
 
   AWS:
