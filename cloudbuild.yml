@@ -1,0 +1,4 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['functions', 'deploy', 'function-github-1', '--trigger-topic=function-github-1', '--runtime', 'python38', '--entry-point', 'my_function']
+  dir: 'Google_Functions/' 
