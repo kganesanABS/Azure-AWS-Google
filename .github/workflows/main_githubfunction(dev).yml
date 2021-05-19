@@ -65,18 +65,30 @@ jobs:
       with:
         python-version: ${{ env.PYTHON_VERSION }}
         
-    - name: Setup GCP Service Account
-      uses: google-github-actions/setup-gcloud@master
+    - name: Market Deploy Google Function
+      uses: google-github-actions/deploy-cloud-functions@main
       with:
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
-        service_account_email: ${{ secrets.GCP_EMAIL }}
-        service_account_key: ${{ secrets.GCP_KEY }}    
-        export_default_credentials: true
+        name: my-function-1
+        runtime: python38
+        region: europe-west1
+        source_dir: ./Google_Functions/
+        credentials: ${{ secrets.GCP_KEY }}
+    
+    # Example of using the output
+    - id: test
+      run: curl "${{ steps.deploy.outputs.url }}"
+    #- name: Setup GCP Service Account
+    #  uses: google-github-actions/setup-gcloud@master
+    #  with:
+    #    project_id: ${{ secrets.GCP_PROJECT_ID }}
+    #    service_account_email: ${{ secrets.GCP_EMAIL }}
+    #    service_account_key: ${{ secrets.GCP_KEY }}    
+    #    export_default_credentials: true
         
-    - name: Deploy the function
-      run: |
-        gcloud functions deploy function-Github-1 --trigger-http --runtime=python38 --source=https://source.developers.google.com/projects/idyllic-chimera-298910/repos/Azure-AWS-Google/moveable-aliases/main/paths//Google_Functions/ --region=europe-west1
-        gcloud alpha functions add-iam-policy-binding function-Github-1 --member=allUsers --role=roles/cloudfunctions.invoker
+    #- name: Deploy the function
+    #  run: |
+    #    gcloud functions deploy function-Github-1 --trigger-http --runtime=python38 --source=https://source.developers.google.com/projects/idyllic-chimera-298910/repos/Azure-AWS-Google/moveable-aliases/main/paths//Google_Functions/ --region=europe-west1
+    #    gcloud alpha functions add-iam-policy-binding function-Github-1 --member=allUsers --role=roles/cloudfunctions.invoker
 
   AWS:
   # The type of runner that the job will run on
