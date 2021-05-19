@@ -74,9 +74,6 @@ jobs:
         source_dir: ./Google_Functions/
         credentials: ${{ secrets.GCP_KEY }}
     
-    # Example of using the output
-    - id: test
-      run: curl "${{ steps.deploy.outputs.url }}"
     #- name: Setup GCP Service Account
     #  uses: google-github-actions/setup-gcloud@master
     #  with:
