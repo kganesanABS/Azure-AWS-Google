@@ -1,0 +1,16 @@
+service: my-gcloud-function
+
+provider:
+  name: google
+  runtime: python38
+  project: My First Project
+  credentials:
+
+plugins:
+  - serverless-google-cloudfunctions
+
+functions:
+  first:
+    handler: hello
+    events:
+      - http: path
