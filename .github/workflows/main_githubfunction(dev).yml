@@ -85,7 +85,7 @@ jobs:
     - name: Run commands
       run: |
          pip install -r requirements.txt --target=".python_packages/lib/site-packages"
-         gcloud beta --quiet functions deploy Git-function --runtime python38 --source Google_Functions/ --entry-point hello_http --trigger-http --project idyllic-chimera-298910 --region europe-west1 --allow-unauthenticated
+         gcloud --quiet beta functions deploy Git-function --runtime python38 --source Google_Functions/ --entry-point hello_http --trigger-http --project idyllic-chimera-298910 --region europe-west1 --allow-unauthenticated
 
   AWS:
   # The type of runner that the job will run on
