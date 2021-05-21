@@ -1,14 +1,15 @@
-/**
- * HTTP Cloud Function.
- * This function is exported by index.js, and is executed when
- * you make an HTTP request to the deployed function's endpoint.
- *
- * @param {Object} req Cloud Function request context.
- *                     More info: https://expressjs.com/en/api.html#req
- * @param {Object} res Cloud Function response context.
- *                     More info: https://expressjs.com/en/api.html#res
- */
-
-exports.helloGET = (req, res) => {
-  res.send('Hello World!');
-};
+def hello_get(request):
+    """HTTP Cloud Function.
+    Args:
+        request (flask.Request): The request object.
+        <https://flask.palletsprojects.com/en/1.1.x/api/#incoming-request-data>
+    Returns:
+        The response text, or any set of values that can be turned into a
+        Response object using `make_response`
+        <https://flask.palletsprojects.com/en/1.1.x/api/#flask.make_response>.
+    Note:
+        For more information on how Flask integrates with Cloud
+        Functions, see the `Writing HTTP functions` page.
+        <https://cloud.google.com/functions/docs/writing/http#http_frameworks>
+    """
+    return 'Hello World!
