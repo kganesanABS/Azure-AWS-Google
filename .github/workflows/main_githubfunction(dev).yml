@@ -65,14 +65,6 @@ jobs:
       with:
         python-version: ${{ env.PYTHON_VERSION }}
         
-    #- name: Market Deploy Google Function
-    #  uses: google-github-actions/deploy-cloud-functions@main
-    #  with:
-    #    name: my-function-2
-    #    runtime: python38
-    #    region: europe-west1
-    #    source_dir: ./Google_Functions/main.py
-    #    credentials: ${{ secrets.GCP_KEY }}
     
     - name: Setup GCP Service Account
       uses: google-github-actions/setup-gcloud@master
