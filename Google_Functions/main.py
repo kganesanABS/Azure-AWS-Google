@@ -1,22 +1,14 @@
-from flask import escape
+/**
+ * HTTP Cloud Function.
+ * This function is exported by index.js, and is executed when
+ * you make an HTTP request to the deployed function's endpoint.
+ *
+ * @param {Object} req Cloud Function request context.
+ *                     More info: https://expressjs.com/en/api.html#req
+ * @param {Object} res Cloud Function response context.
+ *                     More info: https://expressjs.com/en/api.html#res
+ */
 
-def hello_http(request):
-    """HTTP Cloud Function.
-    Args:
-        request (flask.Request): The request object.
-        <https://flask.palletsprojects.com/en/1.1.x/api/#incoming-request-data>
-    Returns:
-        The response text, or any set of values that can be turned into a
-        Response object using `make_response`
-        <https://flask.palletsprojects.com/en/1.1.x/api/#flask.make_response>.
-    """
-    request_json = request.get_json(silent=True)
-    request_args = request.args
-
-    if request_json and 'name' in request_json:
-        name = request_json['name']
-    elif request_args and 'name' in request_args:
-        name = request_args['name']
-    else:
-        name = 'World'
-    return 'Hello {}!'.format(escape(name))
+exports.helloGET = (req, res) => {
+  res.send('Hello World!');
+};
