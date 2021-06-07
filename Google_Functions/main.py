@@ -1,7 +1,7 @@
 from flask import escape
 
 def hello_http(request):
-    """HTTP Cloud Function Palme test 2 :) .
+    """HTTP Cloud Function Palme test 1 deploy it :) .
     Args:
         request (flask.Request): The request object.
         <https://flask.palletsprojects.com/en/1.1.x/api/#incoming-request-data>
