@@ -1,127 +1,49 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Deploy Python Function Multi-Cloud
+name: SDASH-DEV
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
-
-env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-  PYTHON_VERSION: '3.8' # set this to the python version to use (supports 3.6, 3.7, 3.8)
-
-jobs:
-  Azure:
-    runs-on: ubuntu-latest
-    steps:
-    - name: 'Checkout GitHub Action'
-      uses: actions/checkout@master
-    
-    - name: 'Check Syntax Python Code For Azure job'
-      uses: cclauss/Find-Python-syntax-errors-action@master
-
-    - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ env.PYTHON_VERSION }}
-
-    - name: 'Resolve Project Dependencies Using Pip'
-      shell: bash
-      run: |
-        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt --target=".python_packages/lib/site-packages"
-        popd
-
-    - name: 'Run Azure Functions Action'
-      uses: Azure/functions-action@v1
-      id: fa
-      with:
-        app-name: 'githubfunction'
-        slot-name: 'dev'
-        package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_55b7621b766942728e16eec0537d0e70 }}
-        
-  Google:
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    #does this mean that the files in my github repo are accessible by this YAML file?
+   branches: [sdash-python-net-reverse-branch]
+  
+env:  
+  AZURE_WEBAPP_NAME: 'dev-sdash'
+  AZURE_FUNCTIONAPP_NAME: 'func-sdash-dev-001'
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  DOTNET_VERSION: '6.0.x' 
+  
+jobs:    
+  dev:      
+    runs-on: windows-latest           
+    steps:     
     - uses: actions/checkout@v2
-
-    - name: 'Check Syntax Python Code For Google job'
-      uses: cclauss/Find-Python-syntax-errors-action@master
-
-    #installs a version of python, but I need this if deploying to a severless Python Lambda?
-    - name: Set up Python ${{ env.PYTHON_VERSION }} Environment
-      uses: actions/setup-python@v2
+    - uses: azure/login@v1
       with:
-        python-version: ${{ env.PYTHON_VERSION }}
-        
-    
-    - name: Setup GCP Service Account
-      uses: google-github-actions/setup-gcloud@master
+          creds: ${{ secrets.DEV_AZURE_CREDENTIALS }}     
+   
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
       with:
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
-        service_account_email: ${{ secrets.GCP_EMAIL }}
-        service_account_key: ${{ secrets.GCP_KEY }}    
-        export_default_credentials: true
-        
-    - name: Run commands
+          dotnet-version: ${{ env.DOTNET_VERSION }}    
+
+    - name: dotnet build and publish
       run: |
-         pip install -r requirements.txt --target=".python_packages/lib/site-packages"
-         gcloud --quiet beta functions deploy Git-function --runtime python38 --source Google_Functions/ --entry-point hello_http --trigger-http --project idyllic-chimera-298910 --region europe-west1 --allow-unauthenticated
-
-  AWS:
-  # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    #does this mean that the files in my github repo are accessible by this YAML file?
-    - uses: actions/checkout@v2
-
-    - name: 'Check Syntax Python Code For AWS job'
-      uses: cclauss/Find-Python-syntax-errors-action@master
-
-    #installs a version of python, but I need this if deploying to a severless Python Lambda?
-    - name: Set up Python ${{ env.PYTHON_VERSION }} Environment
-      uses: actions/setup-python@v2
+          dotnet restore
+          dotnet build --configuration Release
+          dotnet publish -c Release              
+     
+    - name: Deploy to SDASH Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
       with:
-        python-version: ${{ env.PYTHON_VERSION }}
-
-
-    #credentials to connect to AWS
-    - name: Configure AWS credentials from Admin account
-      uses: aws-actions/configure-aws-credentials@v1
+         app-name: ${{ env.AZURE_WEBAPP_NAME }}
+         package: ./ABSPlatform/bin/Release/net6.0/publish
+         
+    - name: 'Deploy to SDASH Functions'
+      id: deploy-sdash-fa
+      uses: Azure/functions-action@v1      
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-central-1
-        profile_name: default
-        runtime: python3.8
-
-    # Runs a set of commands using the runners shell; THIS DOESN'T WORK
-    - name: Run multiple commands for install environment
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+        package: './ABSPlatform.Functions/bin/Release/net6.0/publish'
+        
+    - name: logout
       run: |
-         #install PIP
-         python -m pip install pip --upgrade pip
-         #install all dependencies as defined by requirements.txt in the current directory
-         pip3 install -r requirements.txt
-         npm install
-         #ensuring current working directory is accessible by the function--this might not be doing anything
-         export PATH=$PATH:$(pwd)
-    # Deploy main.py to AWS
-    - name: Serverless
-      uses: serverless/github-action@master
-      with:
-        args: deploy --region eu-central-1 
+          az logout
